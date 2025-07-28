@@ -15,6 +15,8 @@ import Profile from "./pages/Profile";
 import CreateProduct from "./pages/CreateProduct";
 import CreateProductCategory from "./pages/CreateProductCategory";
 import AdminRoute from "./components/AdminRoute";
+import ProductList from "./pages/ProductList";
+import EditProduct from "./pages/EditProduct";
 
 const stripePromise = loadStripe("pk_test_51RokSJDAcUfEF0K8LLeeterLaibJr0sOWY6a4uN8ZlCf3kRWmLkotXO15XT40DiPgDUuheViwXYhMyKsyDMmn7zK00M6V5r5tL");
 
@@ -35,6 +37,8 @@ function App() {
           {/* ✅ Admin Only Routes */}
           <Route path="/admin/create-product" element={<CreateProduct />} />
           <Route path="/admin/create-category" element={<CreateProductCategory />} />
+          <Route path="/admin/products" element={<ProductList />} />
+          <Route path="/edit-product/:id" element={<EditProduct />} />  
         </Routes>
       </Router>
     </Elements>

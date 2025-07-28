@@ -33,6 +33,7 @@ export default function Navbar() {
               <Link to="/admin/create-product">Create Product</Link>
               <Link to="/admin/create-category">Create Category</Link>
               <Link to="/admin/products">Manage Products</Link> {/* ✅ Add this */}
+              <Link to="/admin/categories">Manage Categories</Link>
             </>
           )}
 

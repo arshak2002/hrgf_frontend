@@ -48,6 +48,35 @@ export default function Orders() {
                       <p>Qty: {item.quantity}</p>
                       <p>₹{item.product.price}</p>
                     </div>
+                    <button
+                      className="download-btn"
+                      onClick={() => {
+                        const token = localStorage.getItem("token");
+                        const receiptUrl = `${process.env.REACT_APP_BACKEND_URL}product/orders/${order.id}/download-receipt/`;
+
+                        axios
+                          .get(receiptUrl, {
+                            headers: { Authorization: `Bearer ${token}` },
+                            responseType: "blob", // Important for downloading PDFs
+                          })
+                          .then((response) => {
+                            const url = window.URL.createObjectURL(new Blob([response.data]));
+                            const link = document.createElement("a");
+                            link.href = url;
+                            link.setAttribute("download", `order_${order.id}_receipt.pdf`);
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                          })
+                          .catch((err) => {
+                            console.error("Failed to download receipt", err);
+                            alert("Failed to download receipt.");
+                          });
+                      }}
+                    >
+                      Download Receipt
+                    </button>
+
                   </div>
                 ))}
               </div>

@@ -18,6 +18,7 @@ import AdminRoute from "./components/AdminRoute";
 import ProductList from "./pages/ProductList";
 import EditProduct from "./pages/EditProduct";
 import CategoryList from "./pages/CategoryList";
+import AdminOrderList from "./pages/AllOrders"
 
 const stripePromise = loadStripe("pk_test_51RokSJDAcUfEF0K8LLeeterLaibJr0sOWY6a4uN8ZlCf3kRWmLkotXO15XT40DiPgDUuheViwXYhMyKsyDMmn7zK00M6V5r5tL");
 
@@ -41,6 +42,7 @@ function App() {
           <Route path="/admin/products" element={<ProductList />} />
           <Route path="/edit-product/:id" element={<EditProduct />} /> 
           <Route path="/admin/categories" element={<CategoryList />} /> 
+          <Route path="/admin/all-orders" element={<AdminOrderList />} /> 
         </Routes>
       </Router>
     </Elements>

@@ -12,9 +12,17 @@ export default function Login() {
         email,
         password,
       });
+
+      // Save tokens and admin status
       localStorage.setItem("token", res.data.access);
       localStorage.setItem("admin", res.data.admin);
-      window.location.href = "/";
+
+      // Redirect based on admin status
+      if (res.data.admin === true || res.data.admin === "true") {
+        window.location.href = "/admin/all-orders";
+      } else {
+        window.location.href = "/";
+      }
     } catch (err) {
       alert("Login failed. Please check your credentials.");
     }

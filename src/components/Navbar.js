@@ -9,34 +9,36 @@ export default function Navbar() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("refresh_token");
-    localStorage.removeItem("admin"); // optional: clear admin flag
+    localStorage.removeItem("admin");
     navigate("/login");
   };
 
   return (
     <nav className="navbar">
-      <Link to="/">Home</Link>
-
       {!isAuthenticated ? (
         <>
           <Link to="/login">Login</Link>
           <Link to="/register">Register</Link>
         </>
-      ) : (
+      ) : isAdmin ? (
+        // Admin-only menu
         <>
+          <Link to="/admin/create-product">Create Product</Link>
+          <Link to="/admin/create-category">Create Category</Link>
+          <Link to="/admin/products">Manage Products</Link>
+          <Link to="/admin/categories">Manage Categories</Link>
+          <Link to="/admin/all-orders">All Orders</Link>
+          <button onClick={handleLogout} className="logout-button">
+            Logout
+          </button>
+        </>
+      ) : (
+        // Non-admin menu
+        <>
+          <Link to="/">Home</Link>
           <Link to="/cart">Cart</Link>
           <Link to="/orders">Orders</Link>
           <Link to="/profile">Profile</Link>
-
-          {isAdmin && (
-            <>
-              <Link to="/admin/create-product">Create Product</Link>
-              <Link to="/admin/create-category">Create Category</Link>
-              <Link to="/admin/products">Manage Products</Link> {/* ✅ Add this */}
-              <Link to="/admin/categories">Manage Categories</Link>
-            </>
-          )}
-
           <button onClick={handleLogout} className="logout-button">
             Logout
           </button>

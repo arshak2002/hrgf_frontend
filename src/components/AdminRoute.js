@@ -1,13 +1,9 @@
 // components/AdminRoute.js
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
-export default function AdminRoute({ children }) {
+export default function AdminRoute() {
   const isAuthenticated = !!localStorage.getItem("token");
   const isAdmin = localStorage.getItem("admin") === "true";
 
-  if (!isAuthenticated || !isAdmin) {
-    return <Navigate to="/login" replace />;
-  }
-
-  return children;
+  return isAuthenticated && isAdmin ? <Outlet /> : <Navigate to="/login" replace />;
 }
